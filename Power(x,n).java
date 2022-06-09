@@ -1,21 +1,15 @@
 class Solution {
     public double myPow(double x, int n) {
-        if(n == 0){ //base case (x power 0 = 1)
-            return 1;
-        }
-        double temp = myPow(x,n/2); //computing power for pow(x,n/2) -> divide & conquer step
-        if(n%2 == 0){
-            return temp * temp;
-            
-        }
-        
-        else {
-            if(n < 0){
-                return 1/x*(temp*temp);
-            } else {
-                return x * temp * temp;    
-            }
-        }
+        return myPowSol(x,1L*n);
 		
+    }
+    
+    public double myPowSol(double x, Long n){
+        if(n==0)
+            return 1;
+        if(n<0)
+            return myPowSol(1/x,-n);
+        
+        return n%2==0 ?  myPowSol(x*x,n/2) :  x*myPowSol(x*x,n/2);
     }
 }
